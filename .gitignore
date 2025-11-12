@@ -1,0 +1,22 @@
+# Compiled class files
+bin/
+*.class
+
+# Generated images
+*.png
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.swp
+*~
