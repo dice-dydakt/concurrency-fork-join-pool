@@ -151,6 +151,11 @@ public class MandelbrotForkJoinTiles {
         int totalTiles = tasks.size();
         System.out.println("Total tiles: " + totalTiles);
 
+        // Shuffle tasks to improve load balance (spatially skewed workload)
+        // Deterministic shuffle for reproducible results
+        //Collections.shuffle(tasks, new Random(42));
+        //System.out.println("Task order: SHUFFLED (improves load balance for spatially skewed workload)");
+
         long startTime = System.nanoTime();
 
         // Execute all tasks in dedicated pool
