@@ -123,8 +123,8 @@ public class MandelbrotForkJoinBinary {
 
             for (int py = r.startY; py < r.endY; py++) {
                 for (int px = r.startX; px < r.endX; px++) {
-                    double cx = xMin + (xMax - xMin) * px / width;
-                    double cy = yMin + (yMax - yMin) * py / height;
+                    double cx = xMin + (xMax - xMin) * px / (width - 1);
+                    double cy = yMin + (yMax - yMin) * py / (height - 1);
 
                     double iterations = MandelbrotUtils.computeIterations(cx, cy, maxIterations);
                     int color = MandelbrotUtils.iterationsToColor(iterations, maxIterations);
@@ -140,7 +140,9 @@ public class MandelbrotForkJoinBinary {
 
     public BufferedImage generate(int threshold) {
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        ForkJoinPool pool = ForkJoinPool.commonPool();
+
+        int parallelism = Runtime.getRuntime().availableProcessors();
+        ForkJoinPool pool = new ForkJoinPool(parallelism);
 
         String mode = instrumented ? "INSTRUMENTED " : "";
         System.out.println(mode + "ForkJoin Mandelbrot (Binary Split - Recursive)");
@@ -162,6 +164,8 @@ public class MandelbrotForkJoinBinary {
         long endTime = System.nanoTime();
 
         lastComputationTimeSeconds = (endTime - startTime) / 1_000_000_000.0;
+
+        pool.shutdown();
 
         // Print detailed statistics only if instrumented
         if (instrumented) {

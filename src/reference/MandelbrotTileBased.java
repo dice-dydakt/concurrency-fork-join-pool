@@ -81,8 +81,8 @@ public class MandelbrotTileBased {
 
             for (int py = tile.startY; py < tile.endY; py++) {
                 for (int px = tile.startX; px < tile.endX; px++) {
-                    double cx = xMin + (xMax - xMin) * px / width;
-                    double cy = yMin + (yMax - yMin) * py / height;
+                    double cx = xMin + (xMax - xMin) * px / (width - 1);
+                    double cy = yMin + (yMax - yMin) * py / (height - 1);
 
                     double iterations = MandelbrotUtils.computeIterations(cx, cy, maxIterations);
                     int color = MandelbrotUtils.iterationsToColor(iterations, maxIterations);
