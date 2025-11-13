@@ -23,8 +23,8 @@ javac -cp bin -d bin src/reference/MandelbrotForkJoinBinary.java
 javac -cp bin -d bin-reference src/reference/MandelbrotForkJoinTiles.java
 
 # Compile benchmark
-echo "Compiling benchmark..."
-javac -cp bin:bin-reference -d bin src/Benchmark.java
+# echo "Compiling benchmark..."
+# javac -cp bin:bin-reference -d bin src/Benchmark.java
 
 echo ""
 echo "Build complete!"
